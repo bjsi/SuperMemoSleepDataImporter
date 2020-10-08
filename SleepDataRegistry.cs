@@ -1,4 +1,5 @@
-﻿using SleepDataImporter.Models;
+﻿using SleepDataImporter.Helpers;
+using SleepDataImporter.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,11 +17,28 @@ namespace SleepDataImporter
             this.SleepData = filepath;
         }
 
-        // TODO: Some way of checking SM is running?
-        // check if the file is locked or something?
-        public void WriteSleepData(List<SleepBlock> blocks)
+        public bool WriteSleepData(List<SleepBlock> blocks)
         {
-            throw new NotImplementedException();
+            if (SMProcess.IsOpen())
+            {
+                Console.WriteLine("Failed to write sleep data because there is a running SuperMemo process");
+                return false;
+            }
+
+            using (BinaryWriter writer = new BinaryWriter(File.OpenWrite(SleepData)))
+            {
+                foreach (var block in blocks)
+                {
+                    var sleepStruct = new SleepDataStruct(block.Start, block.End);
+                    if (!writer.WriteStruct(sleepStruct))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
         }
 
         public void ReadSleepData()

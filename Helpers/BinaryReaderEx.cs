@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.InteropServices;
-using System.Text;
 
-namespace SleepDataImporter
+namespace SleepDataImporter.Models
 {
     public static class BinaryReaderEx
     {

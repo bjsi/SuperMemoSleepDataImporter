@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SleepDataImporter.Helpers;
+using System;
+using System.IO;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace SleepDataImporter.Models
 {
@@ -29,5 +29,21 @@ namespace SleepDataImporter.Models
         /// Four bytes of padding between each entry.
         /// </summary>
         public fixed byte Padding[4];
+
+        public SleepDataStruct(DateTime start, DateTime end)
+        {
+            var s = start.AsSMFloatTime();
+            var e = end.AsSMFloatTime();
+            if (start > end)
+                throw new InvalidDataException("Cannot create struct where start > end");
+
+            Start = s;
+            End = e;
+        }
+
+        public override string ToString()
+        {
+            return $"Start = {Start}; End = {End};";
+        }
     }
 }
