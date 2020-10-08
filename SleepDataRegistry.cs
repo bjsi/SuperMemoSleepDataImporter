@@ -41,13 +41,11 @@ namespace SleepDataImporter
 
         }
 
-        public void ReadSleepData()
+        public List<SleepBlock> ReadSleepData()
         {
             using (Stream stream = File.OpenRead(SleepData))
             {
-                var sleepBlocks = ParseSleepStream(stream);
-                foreach (var block in sleepBlocks)
-                    Console.WriteLine(block);
+                return ParseSleepStream(stream);
             }
         }
 
