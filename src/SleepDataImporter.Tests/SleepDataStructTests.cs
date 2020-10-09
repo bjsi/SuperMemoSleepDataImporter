@@ -10,8 +10,7 @@ namespace SleepDataImporter.Tests
     public class SleepDataStructTests
     {
 
-        [Theory]
-        [InlineData()]
+        [Fact]
         public void CreateValidSleepDataStructSucceeds()
         {
             var start = new DateTime();

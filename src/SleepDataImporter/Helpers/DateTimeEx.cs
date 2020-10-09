@@ -11,12 +11,14 @@ namespace SleepDataImporter.Helpers
         /// </summary>
         public static float AsSMFloatTime(this DateTime input)
         {
-            return CalculateDate(input) + CalculateTime(input);
+            var days = CalculateDate(input);
+            var hms = CalculateTime(input);
+            return days + hms;
         }
 
         private static float CalculateDate(DateTime time)
         {
-            return (Constants.BaseDate - time).Days;
+            return (time  - Constants.BaseDate).Days + 1;
         }
 
         private static float CalculateTime(DateTime time)
@@ -28,7 +30,7 @@ namespace SleepDataImporter.Helpers
             // TODO: Need milliseconds?
 
             var totalSeconds = hours + minutes + seconds;
-            return totalSeconds / secondsInADay;
+            return (float)totalSeconds / secondsInADay;
         }
     }
 }

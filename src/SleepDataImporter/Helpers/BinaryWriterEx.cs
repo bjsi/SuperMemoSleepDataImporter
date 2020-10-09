@@ -6,7 +6,10 @@ namespace SleepDataImporter.Helpers
 {
     public static class BinaryWriterEx
     {
+
         // TODO: Check this is correct
+        // TODO: Is it better to use BinaryFormatter?
+
         public static bool WriteStruct<T>(this BinaryWriter w, T obj)
         {
             byte[] buffer = new byte[Marshal.SizeOf(obj)];

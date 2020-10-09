@@ -9,7 +9,9 @@ namespace SleepDataImporter.Helpers
         /// </summary>
         public static DateTime AsDateTime(this float input)
         {
-            return CalculateDate(input) + CalculateTime(input);
+            var date = CalculateDate(input);
+            var time = CalculateTime(input);
+            return date + time;
         }
 
         private static DateTime CalculateDate(float time)
@@ -20,7 +22,8 @@ namespace SleepDataImporter.Helpers
 
         private static TimeSpan CalculateTime(float time)
         {
-            return TimeSpan.FromDays(time % 1);
+            float percent = (float)Math.Round(time % 1, 3);
+            return TimeSpan.FromDays(percent).RoundSeconds();
         }
     }
 }
