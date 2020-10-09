@@ -55,11 +55,22 @@ namespace SleepDataImporter
 
             using (BinaryReader binStream = new BinaryReader(stream, Encoding.Default))
             {
+                int skipped = 0;
                 while (binStream.BaseStream.Position < binStream.BaseStream.Length)
                 {
-                    var sleepBlock = binStream.ReadStruct<SleepDataStruct>();
-                    ret.Add(new SleepBlock(ref sleepBlock));
+                    try
+                    {
+                        var sleepBlock = binStream.ReadStruct<SleepDataStruct>();
+                        ret.Add(new SleepBlock(ref sleepBlock));
+                    }
+                    catch (InvalidDataException)
+                    {
+                        skipped++;
+                    }
                 }
+
+                Console.WriteLine($"{skipped} invalid sleep blocks (start > end) were skipped");
+
             }
 
             return ret;
