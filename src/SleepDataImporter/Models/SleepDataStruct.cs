@@ -28,7 +28,7 @@ namespace SleepDataImporter.Models
         /// TODO: Is there a better way to specify padding?
         /// Four bytes of padding between each entry.
         /// </summary>
-        public fixed byte Padding[4];
+        public const uint Padding = 0xFFFF2020;
 
         public SleepDataStruct(DateTime start, DateTime end)
         {

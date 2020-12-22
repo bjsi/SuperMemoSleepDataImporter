@@ -43,9 +43,17 @@ namespace SleepDataImporter
 
         public List<SleepBlock> ReadSleepData()
         {
-            using (Stream stream = File.OpenRead(SleepData))
+            try
             {
-                return ParseSleepStream(stream);
+                using (Stream stream = File.OpenRead(SleepData))
+                {
+                    return ParseSleepStream(stream);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Failed to Read sleep data with exception {e}");
+                return null;
             }
         }
 

@@ -13,6 +13,7 @@ namespace SleepDataImporter.Tests
 
         // TODO: Test writing multiple blocks.
         // TODO: Where do the blocks get written to? At the end of the file?
+        // TODO: Is the padding correct
 
         [Theory]
         [InlineData(new int[] { 2020, 09, 10, 10, 10, 0 }, new int[] { 2020, 09, 11, 11, 5, 0})]
