@@ -8,13 +8,17 @@ namespace SleepDataImporter.Models
     {
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
+        public bool NaturalWake { get; set; }
+        public bool NaturalToBed { get; set; }
 
-        public SleepBlock(DateTime start, DateTime end) 
+        public SleepBlock(DateTime start, DateTime end, bool naturalWake = true, bool naturalToBed = true)
         {
             ThrowIfInvalid(start, end);
 
             this.Start = start;
             this.End = end;
+            this.NaturalWake = naturalWake;
+            this.NaturalToBed = naturalToBed;
         }
 
         public SleepBlock(ref SleepDataStruct block)
@@ -25,6 +29,8 @@ namespace SleepDataImporter.Models
 
             this.Start = start;
             this.End = end;
+            this.NaturalWake = Convert.ToBoolean(block.NaturalWake);
+            this.NaturalToBed = Convert.ToBoolean(block.NaturalToBed);
         }
 
         private void ThrowIfInvalid(DateTime start, DateTime end)

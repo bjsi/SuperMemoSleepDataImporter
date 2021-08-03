@@ -5,7 +5,9 @@ using System.Runtime.InteropServices;
 
 namespace SleepDataImporter.Models
 {
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 12)]
+    [StructLayout(LayoutKind.Sequential,
+        Pack = 1,
+        Size = 12)]
     public unsafe struct SleepDataStruct
     {
         /// <summary>
@@ -25,12 +27,18 @@ namespace SleepDataImporter.Models
         public float End;
 
         /// <summary>
-        /// TODO: Is there a better way to specify padding?
-        /// Four bytes of padding between each entry.
+        /// True if you woke up naturally without an alarm, waking up
+        /// due to noisy neighbours etc.
         /// </summary>
-        public const uint Padding = 0xFFFF2020;
+        public byte NaturalWake;
 
-        public SleepDataStruct(DateTime start, DateTime end)
+        /// <summary>
+        /// True if you went to bed not under the influence of
+        /// alcohol, drugs, medication etc.
+        /// </summary>
+        public byte NaturalToBed;
+
+        public SleepDataStruct(DateTime start, DateTime end, bool naturalWake = true, bool naturalToBed = true)
         {
             var s = start.AsSMFloatTime();
             var e = end.AsSMFloatTime();
@@ -39,11 +47,13 @@ namespace SleepDataImporter.Models
 
             Start = s;
             End = e;
+            NaturalWake = Convert.ToByte(naturalWake);
+            NaturalToBed = Convert.ToByte(naturalToBed);
         }
 
         public override string ToString()
         {
-            return $"Start = {Start}; End = {End};";
+            return $"<Sleep Start={Start} End={End} NaturalWake={NaturalWake} NaturalToBed={NaturalToBed}>";
         }
     }
 }

@@ -10,10 +10,10 @@ namespace SleepDataImporter.Tests
     {
 
         [Theory]
-        [InlineData(new int[] { 2020, 09, 10, 10, 10, 01 }, new int[] { 2020, 09, 11, 11, 5, 4})]
-        [InlineData(new int[] { 2020, 09, 10, 10, 10, 30 }, new int[] { 2020, 09, 11, 11, 5, 25})]
-        [InlineData(new int[] { 2020, 09, 10, 10, 10, 31 }, new int[] { 2020, 09, 11, 11, 5, 39})]
-        [InlineData(new int[] { 2020, 09, 10, 10, 10, 59 }, new int[] { 2020, 09, 11, 11, 5, 50})]
+        [InlineData(new int[] { 2020, 09, 10, 10, 10, 0 }, new int[] { 2020, 09, 11, 11, 5, 0})]
+        [InlineData(new int[] { 2020, 09, 10, 10, 10, 0 }, new int[] { 2020, 09, 11, 11, 5, 0})]
+        [InlineData(new int[] { 2020, 09, 10, 10, 10, 0 }, new int[] { 2020, 09, 11, 11, 5, 0})]
+        [InlineData(new int[] { 2020, 09, 10, 10, 10, 0 }, new int[] { 2020, 09, 11, 11, 5, 0})]
         public void CreateValidSleepDataStructSucceeds(int[] start, int[] end)
         {
             var s = new DateTime(start[0], start[1], start[2], start[3], start[4], start[5]).RoundToNearest(TimeSpan.FromMinutes(1));
