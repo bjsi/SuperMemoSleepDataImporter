@@ -9,3 +9,7 @@
 ### File Structure
 
 See [SleepDataStruct.cs](https://github.com/bjsi/SuperMemoSleepDataImporter/blob/master/src/SleepDataImporter/Models/SleepDataStruct.cs) for more information.
+
+### See Also
+
+- [Kpence's program](https://github.com/kpence/SuperMemoSleepDataImporterApp) for importing Fitbit sleep data into SuperMemo using this library.
